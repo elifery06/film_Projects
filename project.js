@@ -6,6 +6,9 @@ const urlElement = document.querySelector("#url");
 // UI Objesini başlat
 const ui = new UI();
 
+//Storge Objesini Üret
+const Storage = new Storage();
+
 //Tüm eventleri yükleme 
 
 eventListeners();
@@ -29,6 +32,7 @@ else{
     const newFilm = new Film(title,director,url);
 
     ui.addFilmToUI(newFilm); //Arayüze film ekleme
+    storage.addFilmToStorage(newFilm);//Storage'a film ekleme
     ui.displayMessages("Film başarıyla eklendi...","success");
 
 

@@ -57,3 +57,7 @@ films.forEach(function(film){
 });
 
 }
+
+UI.prototype.deleteFilmFromUI = function(element){
+    element.parentElement.parentElement.remove();
+}

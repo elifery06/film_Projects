@@ -9,7 +9,7 @@ films.push(newFilm);//Arraya film ekleme
  
 
 
-localStorage.setItem("films",)
+localStorage.setItem("films",JSON.stringify(films));//Stringe çevirme ve storage a yazma
 }
 
 Storage.prototype.getFilmsFromStorage = function(){

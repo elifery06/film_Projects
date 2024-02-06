@@ -61,3 +61,13 @@ films.forEach(function(film){
 UI.prototype.deleteFilmFromUI = function(element){
     element.parentElement.parentElement.remove();
 }
+
+UI.prototype.clearAllFilmsFromUI = function()
+ {
+    const filmList = document.getElementById("films");
+
+    //filmList.innerHTML = ""; // Yavaş
+    while(filmList.firstElementChild !== null){//CHİLD OLDUĞU SÜRECE
+        filmList.firstElementChild.remove();
+    }
+}

@@ -3,6 +3,7 @@ const titleElement = document.querySelector("#title");
 const directorElement = document.querySelector("#director");
 const urlElement = document.querySelector("#url");
 const cardbody =document.querySelectorAll(".card-body")[1];
+const clear = document.getElementById("clear-films");
 
 // UI Objesini başlat
 const ui = new UI();
@@ -17,11 +18,12 @@ function eventListeners(){
     form.addEventListener("submit",addFilm);
     document.addEventListener("DOMContentLoaded",function(){
         let films = Storage.getFilmsFromStorage();
-        UI.loadAllFilms(films);
+        ui.loadAllFilms(films);
 
     });
 
     cardbody.addEventListener("click",deleteFilm);
+    clear.addEventListener("click",clearAllFilms);
 }
 
 function addFilm(e){
@@ -31,17 +33,17 @@ function addFilm(e){
 
     if (title === "" || director === "" || url === ""){
         // Hata 
-        UI.displayMessages("Tüm alanları doldurun...","danger");
+        ui.displayMessages("Tüm alanları doldurun...","danger");
 
     }
     else {
         // Yeni Film
         const newFilm = new Film(title,director,url);
 
-        UI.addFilmToUI(newFilm); // Arayüze film ekleme
+        ui.addFilmToUI(newFilm); // Arayüze film ekleme
         Storage.addFilmToStorage(newFilm); // Storage'a Film Ekleme
 
-        UI.displayMessages("Film başarıyla eklendi...","success");
+        ui.displayMessages("Film başarıyla eklendi...","success");
 
 
     }
@@ -52,8 +54,15 @@ ui.clearInputs(titleElement,urlElement,directorElement);//Inputları temizleme;
 
 function deleteFilm(e){
     if(e.target.id === "delete-film"){
-        UI.deleteFilmFromUI(e.target);
+        ui.deleteFilmFromUI(e.target);
         Storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
-        UI.displayMessages("Silme işlemi başarılı...","success");
+        ui.displayMessages("Silme işlemi başarılı...","success");
+    }
+}
+
+function clearAllFilms(){
+    if(confirm("Emin misiniz?")){
+        ui.clearAllFilmsFromUI();
+        Storage.clearAllFilmsFromStorage();
     }
 }
